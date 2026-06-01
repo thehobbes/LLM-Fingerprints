@@ -11,7 +11,8 @@ __pycache__/
 .ruff_cache/
 
 # Local Data Storage (Do not upload large datasets to GitHub)
-data/
+# Anchored to the repo root so the source package src/data/ is NOT ignored.
+/data/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
