@@ -1,0 +1,17 @@
+# Environments
+.venv/
+ENV/
+.env
+
+# Python caching
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+
+# Local Data Storage (Do not upload large datasets to GitHub)
+data/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
