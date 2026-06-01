@@ -15,3 +15,6 @@ data/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+#Reports
+reports/figures/*.png
