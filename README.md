@@ -77,3 +77,9 @@ To prevent artificial performance inflation and data leakage, purge highly simil
 ```bash
 python3 src/data/deduplicate.py
 ```
+
+### 4. Train/Val/Test Splitting
+To prevent data leakage, the dataset is strictly partitioned by the unique user `prompt` anchor rather than individual responses. This guarantees that if a model saw a specific prompt in training, it will never see that same prompt in validation or testing.
+
+```bash
+python3 src/data/split_data.py

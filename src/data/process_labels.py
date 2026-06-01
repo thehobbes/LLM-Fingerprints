@@ -38,15 +38,17 @@ def process_and_balance_data():
     
     records = []
     for _, row in df.iterrows():
+        prompt_text = str(row.get("prompt", "")) # Grab the prompt
+        
         # Process Model A
         family_a = map_model_family(row.get("model_a", ""))
         if family_a in LABEL_MAP:
-            records.append({"text": row.get("response_a", ""), "label": LABEL_MAP[family_a], "family": family_a})
+            records.append({"prompt": prompt_text, "text": row.get("response_a", ""), "label": LABEL_MAP[family_a], "family": family_a})
             
         # Process Model B
         family_b = map_model_family(row.get("model_b", ""))
         if family_b in LABEL_MAP:
-            records.append({"text": row.get("response_b", ""), "label": LABEL_MAP[family_b], "family": family_b})
+            records.append({"prompt": prompt_text, "text": row.get("response_b", ""), "label": LABEL_MAP[family_b], "family": family_b})
 
     processed_df = pd.DataFrame(records)
     
@@ -68,7 +70,7 @@ def process_and_balance_data():
     output_path = PROCESSED_DATA_DIR / "balanced_labels.parquet"
     
     # Drop the temporary 'family' column before saving
-    balanced_df = balanced_df[["text", "label"]]
+    balanced_df = balanced_df[["prompt", "text", "label"]]
     balanced_df.to_parquet(output_path, index=False)
     
     logging.info("Success! Data value counts demonstrate exact statistical parity.")
