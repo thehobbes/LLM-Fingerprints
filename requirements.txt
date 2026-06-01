@@ -15,6 +15,12 @@ datasets==2.19.0
 wandb==0.17.0
 python-dotenv==1.0.1
 
+# Text Mining & Visualization (LLM Fingerprints notebook)
+nltk==3.8.1
+mlxtend==0.23.1
+matplotlib==3.8.4
+networkx==3.3
+
 # Development Tools (Linting & Jupyter)
 ruff==0.4.4
 ipykernel==6.29.4
