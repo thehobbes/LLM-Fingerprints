@@ -26,7 +26,7 @@ ruff check .
 
 ## Data
 
-### Download & filter the LMArena dataset
+### 1. Download & filter the LMArena dataset
 
 `src/data/download_lmsys.py` streams the
 [`lmarena-ai/arena-human-preference-140k`](https://huggingface.co/datasets/lmarena-ai/arena-human-preference-140k)
@@ -64,9 +64,16 @@ python3 src/data/download_lmsys.py --output data/raw/my_filtered.parquet
 | `--split NAME` | Dataset split to stream (default: `train`). |
 | `--log-every N` | Emit a progress line every `N` inspected rows. |
 
-### Target Labeling & Class Balancing
+### 2. Target Labeling & Class Balancing
 After extracting the raw data, run the processing script to map the text responses to their target integer labels (`0: ChatGPT`, `1: Gemini`, `2: Claude`) and mathematically downsample the dataset to achieve perfect 1:1:1 class parity:
 
 ```bash
 python3 src/data/process_labels.py
+```
+
+### 3. Near-Duplicate Detection
+To prevent artificial performance inflation and data leakage, purge highly similar or paraphrased text fragments using a TF-IDF cosine similarity matrix (Threshold: >0.85). This script retains only the first unique instance of a text group:
+
+```bash
+python3 src/data/deduplicate.py
 ```
